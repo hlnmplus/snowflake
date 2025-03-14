@@ -1,0 +1,25 @@
+import asyncio
+import logging
+from os import getenv
+from aiogram import Bot, Dispatcher, types
+from aiogram.enums import ParseMode
+from aiogram.client.default import DefaultBotProperties
+from dotenv import load_dotenv
+load_dotenv()
+
+logging.basicConfig(level = logging.INFO)
+
+token = getenv('API-KEY')
+dp = Dispatcher()
+
+from workers import snowflake
+
+dp.include_routers(snowflake.rt)
+
+bot = Bot(token=token, default=DefaultBotProperties(parse_mode = ParseMode.HTML))
+
+async def main():
+    await dp.start_polling(bot)
+
+if __name__ == "__main__":
+    asyncio.run(main())
