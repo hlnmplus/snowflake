@@ -75,10 +75,18 @@ async def callback(event: types.CallbackQuery):
     if event.data[:3] in cfg:
         chatid = int(event.data[3:])
         config.save_setting(chatid, cfg[event.data[:3]], not config.get_setting(chatid, cfg[event.data[:3]]))
+        lang = config.get_setting(event.message.chat.id, "Locale")
+        buttons = [
+            [InlineKeyboardButton(callback_data = f"ban{event.message.chat.id}", text = locales.string(lang, "BanMembers")+" "+config.checkmark(event.message.chat.id, "BanMembers"))],
+            [InlineKeyboardButton(callback_data = f"ser{event.message.chat.id}", text = locales.string(lang, "DeleteServiceMessages")+" "+config.checkmark(event.message.chat.id, "DeleteServiceMessages"))],
+        ]
+        keyboard = InlineKeyboardMarkup(inline_keyboard = buttons)
+        await event.message.edit_text(locales.string(lang, "settings"), reply_markup = keyboard)
     if event.data[:2] in locales.existingTranslations:
         if event.data[:2] == config.get_setting(event.message.chat.id, "Locale"):
             await event.answer(locales.string(config.get_setting(event.message.chat.id, "Locale"), "AlreadyChosen"))
             return
+
         config.save_setting(event.message.chat.id, "Locale", event.data[:2])
         lang = config.get_setting(event.message.chat.id, "Locale")
         buttons = []
