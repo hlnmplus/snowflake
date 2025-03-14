@@ -14,21 +14,23 @@ rt = Router()
 
 @rt.message(Command("start"))
 async def start(message: types.Message):
-    buttontext = locales.string(message.from_user.language_code, "ghbutton")
+    if message.chat.type == 'private':
+        lang = message.from_user.language_code
+    else:
+        lang = config.get_setting(message.chat.id, "Locale")
+    buttontext = locales.string(lang, "ghbutton")
     button = [[InlineKeyboardButton(url = locales.ghlink, text = buttontext)]]
     keyboard = InlineKeyboardMarkup(inline_keyboard = button)
-    await message.reply(locales.string(message.from_user.language_code, "hi"), disable_web_page_preview = True, reply_markup = keyboard)
-
-@rt.message(Command("f"))
-async def f(message: types.Message):
-    await message.answer(str(await message.bot.get_me()))
+    await message.reply(locales.string(lang, "hi"), disable_web_page_preview = True, reply_markup = keyboard)
 
 @rt.chat_member(ChatMemberUpdatedFilter(IS_NOT_MEMBER >> IS_MEMBER))
 async def joined(event: types.ChatMemberUpdated):
     await event.chat.ban(event.new_chat_member.user.id)
-    await event.chat.unban(event.new_chat_member.user.id)
+    if config.get_setting(message.chat.id, "BanMembers") == True:
+        await event.chat.unban(event.new_chat_member.user.id)
 
 @rt.message()
 async def anything(message: types.Message):
     if message.content_type in [ContentType.NEW_CHAT_MEMBERS, ContentType.LEFT_CHAT_MEMBER]:
-        await message.delete()
+        if config.get_setting(message.chat.id, "DeleteServiceMessages") == True:
+            await message.delete()
