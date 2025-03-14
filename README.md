@@ -17,10 +17,13 @@ I don't know. Answer this question by yourself.
 ### Some other questions
 
 Q: Why you named it Snowflake?
+
 A: I just went outside.
-
+##
 Q: ITS SUPPORTS LINUX???
-A: Let's ask another question — why it shouldn't support Linux?
 
+A: Let's ask another question — why it shouldn't support Linux?
+##
 Q: Is there any russian translation of README?
+
 A: Да, в файле [RUADME.md](https://github.com/hlnmplus/snowflake/blob/main/RUADME.md). Бот так же поддерживает русский язык.
