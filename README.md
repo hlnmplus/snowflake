@@ -4,7 +4,7 @@
 
 ### Installation
 
-Clone repository by running `git clone https://github.com/hlnmplus/snowflake`, install dependencies by running `pip install -r requirements.txt`, and run main.py file.
+Clone repository by running `git clone https://github.com/hlnmplus/snowflake`, install dependencies by running `pip install -r requirements.txt`, paste your BotAPI token in .env file and run main.py file.
 
 ### Is there any running instance?
 

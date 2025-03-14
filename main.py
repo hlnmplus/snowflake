@@ -16,7 +16,7 @@ from workers import snowflake
 
 dp.include_routers(snowflake.rt)
 
-bot = Bot(token=token, default=DefaultBotProperties(parse_mode = ParseMode.HTML))
+bot = Bot(token=token, default=DefaultBotProperties(parse_mode = ParseMode.HTML, link_preview_is_disabled = True))
 
 async def main():
     await dp.start_polling(bot)

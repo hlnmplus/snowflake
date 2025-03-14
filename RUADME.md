@@ -1,10 +1,10 @@
 # Snowflake
 
-## Аналог CommentsVahterBot с открытым исходным кодом. Кикает всех, кто посмеет зайти в группу. Еаписан на aiogram3.
+## Аналог CommentsVahterBot с открытым исходным кодом. Кикает всех, кто посмеет зайти в группу. Написан на aiogram3.
 
 ### Установка
 
-Склонируйте репозиторий используя `git clone https://github.com/hlnmplus/snowflake`, установите зависимости используя `pip install -r requirements.txt`, и запустите main.py (надеюсь разберетесь как).
+Склонируйте репозиторий используя `git clone https://github.com/hlnmplus/snowflake`, установите зависимости используя `pip install -r requirements.txt`, задайте свой API-ключ в .env и запустите main.py (надеюсь разберетесь как).
 
 ### Есть ли какой-то запущенный инстанс?
 

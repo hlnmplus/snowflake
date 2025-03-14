@@ -2,6 +2,7 @@ import json
 
 db = {}
 
+
 def parse_json():
     global db
     try:
@@ -53,5 +54,17 @@ def save_setting(chatid, setting, value):
         db[chat][setting] = value
     save_db()
     return
+
+def checkmark(chatid, setting):
+    chat = str(chatid)
+    try:
+        if db[chat][setting] == True: return "✅"
+        elif db[chat][setting] == False: return "❌"
+        else: return
+    except KeyError:
+        init_chat(chat)
+        if db[chat][setting] == True: return "✅"
+        elif db[chat][setting] == False: return "❌"
+        else: return
 
 parse_json()
