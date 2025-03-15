@@ -34,7 +34,7 @@ async def settings(message: types.Message):
     elif type(member) == types.chat_member_administrator.ChatMemberAdministrator and member.can_restrict_members == True:
         pass
     else:
-        await message.reply(locales.string(lang, "NoformatNoadmin"))
+        await message.reply(locales.string(message.from_user.language_code, "NotAdmin"))
         return
     buttons = [
         [InlineKeyboardButton(callback_data = f"ban{message.chat.id}", text = locales.string(lang, "BanMembers")+" "+config.checkmark(message.chat.id, "BanMembers"))],
@@ -48,12 +48,23 @@ async def lang(message: types.Message):
     if message.chat.type == 'private':
         lang = message.from_user.language_code
         await message.reply(locales.string(lang, "settingspm"))
+        return
     else:
         lang = config.get_setting(message.chat.id, "Locale")
         member = await message.bot.get_chat_member(message.chat.id, message.from_user.id)
-        if member.can_restrict_members != True:
-            await message.reply(locales.string(lang, "NotAdmin"))
+        member = await message.bot.get_chat_member(message.chat.id, message.from_user.id)
+        if type(member) == types.chat_member_owner.ChatMemberOwner:
+            pass
+        elif type(member) == types.chat_member_administrator.ChatMemberAdministrator and member.can_restrict_members == True:
+            pass
+        else:
+            await message.reply(locales.string(message.from_user.language_code, "NotAdmin"))
             return
+        newvalue = not config.get_setting(message.chat.id, 'Enabled')
+        config.save_setting(message.chat.id, 'Enabled', newvalue)
+        answer = locales.string(lang, f"bot{newvalue}")
+        await message.reply(answer)
+        
 
 @rt.message(Command("language"))
 async def lang(message: types.Message):
@@ -61,11 +72,15 @@ async def lang(message: types.Message):
         lang = message.from_user.language_code
         await message.reply(locales.string(lang, "settingspm"))
     else:
-        lang = config.get_setting(message.chat.id, "Locale")
         member = await message.bot.get_chat_member(message.chat.id, message.from_user.id)
-        if member.can_restrict_members != True:
-            await message.reply(locales.string(lang, "NotAdmin"))
+        if type(member) == types.chat_member_owner.ChatMemberOwner:
+            pass
+        elif type(member) == types.chat_member_administrator.ChatMemberAdministrator and member.can_restrict_members == True:
+            pass
+        else:
+            await message.reply(locales.string(message.from_user.language_code, "NotAdmin"))
             return
+        lang = config.get_setting(message.chat.id, "Locale")
         buttons = []
         for i in locales.existingTranslations.keys():
             if i == lang:
@@ -78,8 +93,10 @@ async def lang(message: types.Message):
 
 @rt.chat_member(ChatMemberUpdatedFilter(IS_NOT_MEMBER >> IS_MEMBER))
 async def joined(event: types.ChatMemberUpdated):
+    if config.get_setting(event.chat.id, 'Enabled') == False:
+        return
     await event.chat.ban(event.new_chat_member.user.id)
-    if config.get_setting(event.chat.id, "BanMembers") == True:
+    if config.get_setting(event.chat.id, "BanMembers") == False:
         await event.chat.unban(event.new_chat_member.user.id)
 
 @rt.message()

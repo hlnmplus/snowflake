@@ -14,6 +14,8 @@ en = {
     "AlreadyChosen": "Already chosen",
     "NotAdmin": "<b>❌ You are not an admin.</b>",
     "NoformatNoadmin": "You are not an admin or you don't have rights to restrict members.",
+    "botTrue": "<b>✅ Bot is enabled in this group</b>",
+    "botFalse": "<b>❌ Bot is disabled in this group</b>"
 }
 
 ru = {
@@ -30,6 +32,8 @@ ru = {
     "AlreadyChosen": "Уже выбрано",
     "NotAdmin": "<b>❌ Вы не администратор группы.</b>",
     "NoformatNoadmin": "Вы не администратор группы или у Вас нет прав на ограничение участников.",
+    "botTrue": "<b>✅ Бот включён в этой группе</b>",
+    "botFalse": "<b>❌ Бот выключен в этой группе</b>"
 }
 
 existingTranslations = {

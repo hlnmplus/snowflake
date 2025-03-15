@@ -23,7 +23,7 @@ def init_chat(chatid):
     db[chat] = {
         "DeleteServiceMessages": True,
         "BanMembers": False,
-        "Enable": True,
+        "Enabled": True,
         "Locale": "en"
     }
     save_db()
