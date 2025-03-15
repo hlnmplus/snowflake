@@ -15,7 +15,8 @@ en = {
     "NotAdmin": "<b>❌ You are not an admin.</b>",
     "NoformatNoadmin": "You are not an admin or you don't have rights to restrict members.",
     "botTrue": "<b>✅ Bot is enabled in this group</b>",
-    "botFalse": "<b>❌ Bot is disabled in this group</b>"
+    "botFalse": "<b>❌ Bot is disabled in this group</b>",
+    "NoRights": "<b>😓 Bot doesn't have rights to delete messages and restrict members. Bot will not work until it gets these rights.</b>"
 }
 
 ru = {
@@ -33,7 +34,8 @@ ru = {
     "NotAdmin": "<b>❌ Вы не администратор группы.</b>",
     "NoformatNoadmin": "Вы не администратор группы или у Вас нет прав на ограничение участников.",
     "botTrue": "<b>✅ Бот включён в этой группе</b>",
-    "botFalse": "<b>❌ Бот выключен в этой группе</b>"
+    "botFalse": "<b>❌ Бот выключен в этой группе</b>",
+    "NoRights": "<b>😓 У бота нет прав на удаление сообщений и ограничение участников. Бот не сможет работать, пока ему не выдадут эти права.</b>"
 }
 
 existingTranslations = {
