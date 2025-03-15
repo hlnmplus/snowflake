@@ -11,7 +11,9 @@ en = {
     "BanMembers": "Ban (not kick) everybody, who tried join",
     "Locale": "English",
     "ChooseLang": "<b>🌐 Choose language</b>",
-    "AlreadyChosen": "Already chosen"
+    "AlreadyChosen": "Already chosen",
+    "NotAdmin": "<b>❌ You are not an admin.</b>",
+    "NoformatNoadmin": "You are not an admin.",
 }
 
 ru = {
@@ -25,7 +27,9 @@ ru = {
     "BanMembers": "Банить всех, кто посмеет зайти (не кикать)",
     "Locale": "Russian (Русский)",
     "ChooseLang": "<b>🌐 Выберите язык</b>",
-    "AlreadyChosen": "Уже выбрано"
+    "AlreadyChosen": "Уже выбрано",
+    "NotAdmin": "<b>❌ Вы не администратор группы.</b>",
+    "NoformatNoadmin": "Вы не администратор группы.",
 }
 
 existingTranslations = {
