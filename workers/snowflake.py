@@ -92,6 +92,13 @@ async def lang(message: types.Message):
             await message.reply(locales.string(message.from_user.language_code, "NotAdmin"))
             return
         lang = config.get_setting(message.chat.id, "Locale")
+
+        gotme = await message.bot.get_me()
+        me = await message.bot.get_chat_member(message.chat.id, gotme.id)
+        if (type(me) == types.chat_member_member.ChatMemberMember) or (types.chat_member_administrator.ChatMemberAdministrator and (me.can_restrict_members == False or me.can_delete_messages == False)):
+            await message.reply(locales.string(lang, "NoRights"))
+            return
+
         buttons = []
         for i in locales.existingTranslations.keys():
             if i == lang:
@@ -167,6 +174,7 @@ async def callback(event: types.CallbackQuery):
             return
 
         config.save_setting(event.message.chat.id, "Locale", event.data[:2])
+        lang = config.get_setting(event.message.chat.id, "Locale")
         buttons = []
         for i in locales.existingTranslations.keys():
             if i == lang:
