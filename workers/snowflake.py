@@ -26,21 +26,22 @@ async def start(message: types.Message):
 @rt.message(Command("settings"))
 async def settings(message: types.Message):
     if message.chat.type == 'private':
-        lang = message.from_user.language_code
         await message.reply(locales.string(lang, "settingspm"))
+    lang = config.get_setting(message.chat.id, "Locale")
+    member = await message.bot.get_chat_member(message.chat.id, message.from_user.id)
+    if type(member) == types.chat_member_owner.ChatMemberOwner:
+        pass
+    elif type(member) == types.chat_member_administrator.ChatMemberAdministrator and member.can_restrict_members == True:
+        pass
     else:
-        lang = config.get_setting(message.chat.id, "Locale")
-        member = await message.bot.get_chat_member(message.chat.id, message.from_user.id)
-        if member.can_restrict_members != True:
-            await message.reply(locales.string(lang, "NotAdmin"))
-            return
-        
-        buttons = [
-            [InlineKeyboardButton(callback_data = f"ban{message.chat.id}", text = locales.string(lang, "BanMembers")+" "+config.checkmark(message.chat.id, "BanMembers"))],
-            [InlineKeyboardButton(callback_data = f"ser{message.chat.id}", text = locales.string(lang, "DeleteServiceMessages")+" "+config.checkmark(message.chat.id, "DeleteServiceMessages"))],
-        ]
-        keyboard = InlineKeyboardMarkup(inline_keyboard = buttons)
-        await message.reply(locales.string(lang, "settings"), reply_markup = keyboard)
+        await message.reply(locales.string(lang, "NoformatNoadmin"))
+        return
+    buttons = [
+        [InlineKeyboardButton(callback_data = f"ban{message.chat.id}", text = locales.string(lang, "BanMembers")+" "+config.checkmark(message.chat.id, "BanMembers"))],
+        [InlineKeyboardButton(callback_data = f"ser{message.chat.id}", text = locales.string(lang, "DeleteServiceMessages")+" "+config.checkmark(message.chat.id, "DeleteServiceMessages"))],
+    ]
+    keyboard = InlineKeyboardMarkup(inline_keyboard = buttons)
+    await message.reply(locales.string(lang, "settings"), reply_markup = keyboard)
 
 @rt.message(Command("toggle"))
 async def lang(message: types.Message):
@@ -94,8 +95,12 @@ async def callback(event: types.CallbackQuery):
         'ser': 'DeleteServiceMessages'
     }
     member = await event.message.bot.get_chat_member(event.message.chat.id, event.from_user.id)
-    if member.can_restrict_members != True:
-        await event.answer(locales.string(lang, "NoformatNoadmin"))
+    if type(member) == types.chat_member_owner.ChatMemberOwner:
+        pass
+    elif type(member) == types.chat_member_administrator.ChatMemberAdministrator and member.can_restrict_members == True:
+        pass
+    else:
+        await event.answer(locales.string(event.from_user.language_code, "NoformatNoadmin"))
         return
     
     if event.data[:3] in cfg:

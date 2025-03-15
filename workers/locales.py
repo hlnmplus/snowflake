@@ -13,7 +13,7 @@ en = {
     "ChooseLang": "<b>🌐 Choose language</b>",
     "AlreadyChosen": "Already chosen",
     "NotAdmin": "<b>❌ You are not an admin.</b>",
-    "NoformatNoadmin": "You are not an admin.",
+    "NoformatNoadmin": "You are not an admin or you don't have rights to restrict members.",
 }
 
 ru = {
@@ -29,7 +29,7 @@ ru = {
     "ChooseLang": "<b>🌐 Выберите язык</b>",
     "AlreadyChosen": "Уже выбрано",
     "NotAdmin": "<b>❌ Вы не администратор группы.</b>",
-    "NoformatNoadmin": "Вы не администратор группы.",
+    "NoformatNoadmin": "Вы не администратор группы или у Вас нет прав на ограничение участников.",
 }
 
 existingTranslations = {
