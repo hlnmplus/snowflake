@@ -130,7 +130,7 @@ async def anything(message: types.Message):
             gotme = await message.bot.get_me()
             me = await message.bot.get_chat_member(message.chat.id, gotme.id)
             if (type(me) == types.chat_member_member.ChatMemberMember) or (types.chat_member_administrator.ChatMemberAdministrator and (me.can_restrict_members == False or me.can_delete_messages == False)):
-                await message.reply(locales.string(lang, "NotAdmin"))
+                await message.reply(locales.string(lang, "NoRights"))
                 return
 
             await message.delete()
