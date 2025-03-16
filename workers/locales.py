@@ -5,7 +5,7 @@ en = {
     "ghbutton": "Source code",
     "invitedok": "<b>👋 Thank you for adding me to this group!</b>\n\nBot is already working, and if you want to disable it for a while, the admin with the rights to change the group profile should use /toggle@projectsnowflakebot. That's it!",
     "invitedfail": "<b>👋 Thank you for adding me to this group!</b>\n\nUnfortunately, when I was added, admins took away the administrator rights I needed: blocking users and deleting messages. I will not be able to function until I have these rights.",
-    "settingspm": "<b>❌ You can't open setting in DM!</b>",
+    "settingspm": "<b>❌ You can't open settings in DM!</b>",
     "settings": "<b>⚙️ Settings</b>\n\nGroup admins can edit bot settings in this group by using buttons below. Use /language to change the language of the bot.",
     "DeleteServiceMessages": "Delete service messages",
     "BanMembers": "Ban (not kick) everybody, who tried join",
