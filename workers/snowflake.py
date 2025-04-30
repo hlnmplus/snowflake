@@ -5,10 +5,6 @@ from aiogram.filters.command import Command
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup, ContentType
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 from workers import locales, config
-from dotenv import load_dotenv
-from os import getenv
-
-load_dotenv()
 
 rt = Router()
 
@@ -36,9 +32,7 @@ async def settings(message: types.Message):
         return
 
     member = await message.bot.get_chat_member(message.chat.id, message.from_user.id)
-    if type(member) == types.chat_member_owner.ChatMemberOwner:
-        pass
-    elif type(member) == types.chat_member_administrator.ChatMemberAdministrator and member.can_restrict_members == True:
+    if (type(member) == types.chat_member_owner.ChatMemberOwner) or (type(member) == types.chat_member_administrator.ChatMemberAdministrator and member.can_restrict_members == True):
         pass
     else:
         await message.reply(locales.string(message.from_user.language_code, "NotAdmin"))
@@ -141,6 +135,7 @@ async def callback(event: types.CallbackQuery):
         'ban': 'BanMembers',
         'ser': 'DeleteServiceMessages'
     }
+    
     member = await event.message.bot.get_chat_member(event.message.chat.id, event.from_user.id)
     if type(member) == types.chat_member_owner.ChatMemberOwner:
         pass
