@@ -2,6 +2,13 @@ import json
 
 db = {}
 
+initdb = {
+    "DeleteServiceMessages": True,
+    "BanMembers": False,
+    "Enabled": True,
+    "Locale": "en",
+    "ReturnNotAdminMessage": False
+}
 
 def parse_json():
     global db
@@ -20,12 +27,7 @@ def parse_json():
 def init_chat(chatid):
     global db
     chat = str(chatid)
-    db[chat] = {
-        "DeleteServiceMessages": True,
-        "BanMembers": False,
-        "Enabled": True,
-        "Locale": "en"
-    }
+    db[chat] = initdb
     save_db()
     return
 
@@ -39,6 +41,8 @@ def save_db():
 def get_setting(chatid, setting):
     chat = str(chatid)
     try:
+        if chat in db.keys() and setting not in db[chat].keys() and setting in initdb.keys():
+            db[chat][setting] = initdb[setting]
         return db[chat][setting]
     except KeyError:
         init_chat(chat)
@@ -48,6 +52,8 @@ def save_setting(chatid, setting, value):
     global db
     chat = str(chatid)
     try:
+        if chat in db.keys() and setting not in db[chat].keys() and setting in initdb.keys():
+            db[chat][setting] = initdb[setting]
         db[chat][setting] = value
     except KeyError:
         init_chat(chat)
