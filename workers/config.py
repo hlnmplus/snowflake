@@ -7,7 +7,7 @@ initdb = {
     "BanMembers": False,
     "Enabled": True,
     "Locale": "en",
-    "ReturnNotAdminMessage": True
+    "ReturnNotAdminMessage": False
 }
 
 def parse_json():
