@@ -1,29 +1,26 @@
 # Snowflake
 
-## Open-source analogy of CommentsVahterBot. Kicks everybody who trying to join your group. Written in aiogram3.
+## Kicks everybody who trying to join your group.
 
 ### Installation
 
-Clone repository by running `git clone https://github.com/hlnmplus/snowflake`, install dependencies by running `pip install -r requirements.txt`, paste your BotAPI token in .env file and run main.py file.
+1. Clone repository: `git clone https://github.com/hlnmplus/snowflake && cd snowflake`
+2. Install dependencies: `pip install -r requirements.txt`
+3. Paste your BotAPI token in .env file
+4. Done! Run main.py file to start the bot.
 
-### Is there any running instance?
+### Official instance
 
-Yes! You can use official instance of bot — https://t.me/projectsnowflakebot
+You can use official instance of bot — https://t.me/projectsnowflakebot. If it's down, message me at https://hlnmplus.t.me
 
-### Why I should use Snowflake?
+### Some questions
 
-I don't know. Answer this question by yourself.
+#### Q: How to translate this bot to my language?
 
-### Some other questions
+A: Edit locales.py file and add your language to existingTranslations var. Create a pull request and just wait.
 
-Q: Why you named it Snowflake?
+#### Q: Will you spy on my chats via your bot?
+A: No. Review the source code and run your own instance if you don't trust me.
 
-A: I just went outside.
-##
-Q: ITS SUPPORTS LINUX???
-
-A: Let's ask another question — why it shouldn't support Linux?
-##
-Q: Is there any russian translation of README?
-
-A: Да, в файле [RUADME.md](https://github.com/hlnmplus/snowflake/blob/main/RUADME.md). Бот так же поддерживает русский язык.
+#### Q: Когда обновление ЪКошелька?
+A: Никогда.
