@@ -1,9 +1,8 @@
 from aiogram import types, Router
 from aiogram.filters import ChatMemberUpdatedFilter
-from aiogram.filters.chat_member_updated import IS_NOT_MEMBER, IS_MEMBER, KICKED
+from aiogram.filters.chat_member_updated import IS_NOT_MEMBER, IS_MEMBER
 from aiogram.filters.command import Command
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup, ContentType
-from aiogram.utils.keyboard import InlineKeyboardBuilder
 from workers import locales, config
 
 rt = Router()
@@ -14,6 +13,13 @@ async def start(message: types.Message):
         lang = message.from_user.language_code
     else:
         lang = config.get_setting(message.chat.id, "Locale")
+        if config.get_setting(message.chat.id, "ReturnNotAdminMessage") == True:
+            member = await message.bot.get_chat_member(message.chat.id, message.from_user.id)
+            if (type(member) == types.chat_member_owner.ChatMemberOwner) or (type(member) == types.chat_member_administrator.ChatMemberAdministrator and member.can_restrict_members == True):
+                pass
+            else:
+                return
+
     buttontext = locales.string(lang, "ghbutton")
     button = [[InlineKeyboardButton(url = locales.ghlink, text = buttontext)]]
     keyboard = InlineKeyboardMarkup(inline_keyboard = button)
