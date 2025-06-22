@@ -1,4 +1,6 @@
-ghlink = "https://github.com/hlnmplus/snowflake"
+#evryz4's fork of holinim's project https://github.com/hlnmplus/snowflake
+
+ghlink = "https://github.com/evryz4/snowflake"
 
 en = {
     "hi": "<b>❄️ Hi!</b>\n\nThis bot does only one thing — kicks everybody, who joins your group.",
@@ -40,12 +42,12 @@ ru = {
     "ReturnNotAdminMessage": 'Использовать сообщение "Вы не администратор"'
 }
 
-existingTranslations = {
+translations = {
     "en": en['Locale'],
     "ru": ru['Locale']
 }
 
 def string(code, name):
-    if code not in existingTranslations:
+    if code not in translations:
         code = "en"
     return globals()[code][name]

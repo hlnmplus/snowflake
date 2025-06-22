@@ -1,8 +1,11 @@
+#evryz4's fork of holinim's project https://github.com/hlnmplus/snowflake
+
 import json
+import os
 
 db = {}
 
-initdb = {
+sample = {
     "DeleteServiceMessages": True,
     "BanMembers": False,
     "Enabled": True,
@@ -12,65 +15,54 @@ initdb = {
 
 def parse_json():
     global db
-    try:
-        file = open('db.json', 'r')
-        db = json.load(file)
-        file.close()
-    except FileNotFoundError:
-        db = {}
-        file = open('db.json', 'w')
-        file.truncate(0)
-        file.write(json.dumps(db))
-        file.close()        
-    return
 
-def init_chat(chatid):
+    try:
+        with open('db.json') as file:
+            db = json.load(file)
+
+    except FileNotFoundError:
+        with open('db.json', 'w') as file:
+            file.truncate(0)
+            file.write(json.dumps(db))
+
+def init_chat(chatid: int | str):
     global db
+
     chat = str(chatid)
-    db[chat] = initdb
+    db[chat] = sample
+
     save_db()
-    return
 
 def save_db():
-    file = open('db.json', 'w')
-    file.truncate(0)
-    file.write(json.dumps(db))
-    file.close()
-    return
+    with open('db.json', 'w') as file:
+        file.truncate(0)
+        file.write(json.dumps(db))
 
-def get_setting(chatid, setting):
-    chat = str(chatid)
-    try:
-        if chat in db.keys() and setting not in db[chat].keys() and setting in initdb.keys():
-            db[chat][setting] = initdb[setting]
-        return db[chat][setting]
-    except KeyError:
-        init_chat(chat)
-        return db[chat][setting]
+def get_setting(chatid: int | str, setting: str) -> str | bool:
+    chatid = str(chatid)
 
-def save_setting(chatid, setting, value):
+    if chatid not in db.keys():
+        init_chat(chatid)
+
+    return db[chatid][setting]
+
+def save_setting(chatid: int | str, setting: str, value: bool | str):
     global db
-    chat = str(chatid)
-    try:
-        if chat in db.keys() and setting not in db[chat].keys() and setting in initdb.keys():
-            db[chat][setting] = initdb[setting]
-        db[chat][setting] = value
-    except KeyError:
-        init_chat(chat)
-        db[chat][setting] = value
-    save_db()
-    return
 
-def checkmark(chatid, setting):
-    chat = str(chatid)
-    try:
-        if db[chat][setting] == True: return "✅"
-        elif db[chat][setting] == False: return "❌"
-        else: return
-    except KeyError:
-        init_chat(chat)
-        if db[chat][setting] == True: return "✅"
-        elif db[chat][setting] == False: return "❌"
-        else: return
+    chatid = str(chatid)
+
+    if chatid not in db.keys():
+        init_chat(chatid)
+
+    db[chatid][setting] = value
+    save_db()
+
+def checkmark(chatid: int | str, setting: str) -> str | None:
+    chatid = str(chatid)
+
+    try: db[chatid][setting]
+    except: init_chat(chatid)
+
+    return '✅' if db[chatid][setting] else '❌'
 
 parse_json()
