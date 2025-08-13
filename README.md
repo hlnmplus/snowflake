@@ -26,7 +26,7 @@ Kicks everybody who trying to join your group.
 
 ## Official instance
 
-You can use official instance of bot — https://t.me/projectsnowflakebot. If it's down, message me at (@hlnmplus)[https://hlnmplus.t.me]
+You can use official instance of bot — https://t.me/projectsnowflakebot. If it's down, message me at [@hlnmplus](https://hlnmplus.t.me)
 
 ## Some questions
 
