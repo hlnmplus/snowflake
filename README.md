@@ -1,26 +1,39 @@
-# Snowflake
+# ❄️ Snowflake
 
-## Kicks everybody who trying to join your group.
+Kicks everybody who trying to join your group. 
 
-### Installation
+## Installation
 
-1. Clone repository: `git clone https://github.com/hlnmplus/snowflake && cd snowflake`
-2. Install dependencies: `pip install -r requirements.txt`
-3. Paste your BotAPI token in .env file
-4. Done! Run main.py file to start the bot.
+1. Clone repository and go to the bot's folder
+   
+   `git clone https://github.com/hlnmplus/snowflake`
+   
+   `cd snowflake`
+3. Install dependencies
+   
+   `python3 -m pip install -r requirements.txt`
+5. Obtain a Telegram BotAPI token at [BotFather](https://t.me/botfather)
+   
+7. Paste your token to the .env file
+   
+   `API-KEY=123456789:PASTE-YOUR-BOTAPI-TOKEN-HERE`,
+   
+   where `123456789:PASTE-YOUR-BOTAPI-TOKEN-HERE` — your BotAPI key
+   
+9. Done! Run command below to start the bot.
+   
+   `python main.py`
 
-### Official instance
+## Official instance
 
-You can use official instance of bot — https://t.me/projectsnowflakebot. If it's down, message me at https://hlnmplus.t.me
+You can use official instance of bot — https://t.me/projectsnowflakebot. If it's down, message me at (@hlnmplus)[https://hlnmplus.t.me]
 
-### Some questions
+## Some questions
 
-#### Q: How to translate this bot to my language?
+### Q: How to translate this bot to my language?
 
 A: Edit locales.py file and add your language to existingTranslations var. Create a pull request and just wait.
 
-#### Q: Will you spy on my chats via your bot?
-A: No. Review the source code and run your own instance if you don't trust me.
+### Q: Can you track me?
 
-#### Q: Когда обновление ЪКошелька?
-A: Никогда.
+A: This bot doesn't spy on your chats, but it's collects IDs of chats where this bot is added. Check `workers/config.py` for more details. If you want to use this bot without any settings and tracking, you can use [Snowball](https://github.com/hlnmplus/snowball).
