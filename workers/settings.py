@@ -2,6 +2,7 @@ from aiogram import types, Router
 from aiogram.filters.command import Command
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from workers import locales, config
+from workers.utils import is_admin, bot_is_admin
 
 rt = Router()
 
@@ -13,9 +14,7 @@ async def start(message: types.Message):
         lang = config.get_setting(message.chat.id, "Locale")
         if config.get_setting(message.chat.id, "ReturnNotAdminMessage") == True:
             member = await message.bot.get_chat_member(message.chat.id, message.from_user.id)
-            if (type(member) == types.chat_member_owner.ChatMemberOwner) or (type(member) == types.chat_member_administrator.ChatMemberAdministrator and member.can_restrict_members == True):
-                pass
-            else:
+            if is_admin(member) == False:
                 return
 
     buttontext = locales.string(lang, "ghbutton")
@@ -33,14 +32,12 @@ async def settings(message: types.Message):
 
     gotme = await message.bot.get_me()
     me = await message.bot.get_chat_member(message.chat.id, gotme.id)
-    if (type(me) == types.chat_member_member.ChatMemberMember) or (types.chat_member_administrator.ChatMemberAdministrator and (me.can_restrict_members == False or me.can_delete_messages == False)):
+    if bot_is_admin(me) == False:
         await message.reply(locales.string(lang, "NoRights"))
         return
 
     member = await message.bot.get_chat_member(message.chat.id, message.from_user.id)
-    if (type(member) == types.chat_member_owner.ChatMemberOwner) or (type(member) == types.chat_member_administrator.ChatMemberAdministrator and member.can_restrict_members == True):
-        pass
-    else:
+    if is_admin(member) == False:
         if config.get_setting(message.chat.id, 'ReturnNotAdminMessage'):
             await message.reply(locales.string(lang, "NotAdmin"))
         return
@@ -62,19 +59,15 @@ async def toggle(message: types.Message):
         lang = config.get_setting(message.chat.id, "Locale")
         gotme = await message.bot.get_me()
         me = await message.bot.get_chat_member(message.chat.id, gotme.id)
-        if (type(me) == types.chat_member_member.ChatMemberMember) or (types.chat_member_administrator.ChatMemberAdministrator and (me.can_restrict_members == False or me.can_delete_messages == False)):
-            await message.reply(locales.string(lang, "NoRights"))
+        if bot_is_admin(me) == False:
             return
         
         member = await message.bot.get_chat_member(message.chat.id, message.from_user.id)
-        if type(member) == types.chat_member_owner.ChatMemberOwner:
-            pass
-        elif type(member) == types.chat_member_administrator.ChatMemberAdministrator and member.can_restrict_members == True:
-            pass
-        else:
+        if is_admin(member) == False:
             if config.get_setting(message.chat.id, 'ReturnNotAdminMessage'):
                 await message.reply(locales.string(lang, "NotAdmin"))
             return
+        
         newvalue = not config.get_setting(message.chat.id, 'Enabled')
         config.save_setting(message.chat.id, 'Enabled', newvalue)
         answer = locales.string(lang, f"bot{newvalue}")
@@ -88,19 +81,16 @@ async def lang(message: types.Message):
     
     lang = config.get_setting(message.chat.id, "Locale")
     member = await message.bot.get_chat_member(message.chat.id, message.from_user.id)
-    if type(member) == types.chat_member_owner.ChatMemberOwner:
-        pass
-    elif type(member) == types.chat_member_administrator.ChatMemberAdministrator and member.can_restrict_members == True:
-        pass
-    else:
+
+    if is_admin(member) == False:
         if config.get_setting(message.chat.id, 'ReturnNotAdminMessage'):
             await message.reply(locales.string(lang, "NotAdmin"))
         return
     
-
     gotme = await message.bot.get_me()
     me = await message.bot.get_chat_member(message.chat.id, gotme.id)
-    if (type(me) == types.chat_member_member.ChatMemberMember) or (types.chat_member_administrator.ChatMemberAdministrator and (me.can_restrict_members == False or me.can_delete_messages == False)):
+
+    if bot_is_admin(me) == False:
         await message.reply(locales.string(lang, "NoRights"))
         return
 

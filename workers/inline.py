@@ -1,7 +1,7 @@
 from aiogram import types, Router
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from workers import locales, config
-from workers.utils import is_admin
+from workers.utils import is_admin, bot_is_admin
 
 rt = Router()
 
@@ -24,7 +24,7 @@ async def callback(event: types.CallbackQuery):
     gotme = await event.bot.get_me()
     me = await event.bot.get_chat_member(event.message.chat.id, gotme.id)
 
-    if (type(me) == types.chat_member_member.ChatMemberMember) or (types.chat_member_administrator.ChatMemberAdministrator and (me.can_restrict_members == False or me.can_delete_messages == False)):
+    if bot_is_admin(me) == False:
         await event.message.edit_text(locales.string(lang, "NoRights"))
         return
     
