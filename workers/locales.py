@@ -17,7 +17,7 @@ en = {
     "botTrue": "<b>✅ Bot is enabled in this group</b>",
     "botFalse": "<b>❌ Bot is disabled in this group</b>",
     "NoRights": "<b>😓 Bot doesn't have rights to delete messages and restrict members. Bot will not work until it gets these rights.</b>",
-    "ReturnNotAdminMessage": 'Return "You are not an admin" message'
+    "ReturnNotAdminMessage": 'Send error messages'
 }
 
 ru = {
@@ -37,7 +37,7 @@ ru = {
     "botTrue": "<b>✅ Бот включён в этой группе</b>",
     "botFalse": "<b>❌ Бот выключен в этой группе</b>",
     "NoRights": "<b>😓 У бота нет прав на удаление сообщений и ограничение участников. Бот не сможет работать, пока ему не выдадут эти права.</b>",
-    "ReturnNotAdminMessage": 'Использовать сообщение "Вы не администратор"'
+    "ReturnNotAdminMessage": 'Сообщать об ошибках'
 }
 
 existingTranslations = {
