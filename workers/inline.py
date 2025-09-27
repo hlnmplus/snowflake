@@ -1,7 +1,7 @@
 from aiogram import types, Router
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from workers import locales, config
-from utils import is_admin
+from workers.utils import is_admin
 
 rt = Router()
 
