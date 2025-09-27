@@ -1,4 +1,4 @@
-import json
+from json import dump, load
 
 db = {}
 
@@ -14,13 +14,13 @@ def parse_json():
     global db
     try:
         file = open('db.json', 'r')
-        db = json.load(file)
+        db = load(file)
         file.close()
     except FileNotFoundError:
         db = {}
         file = open('db.json', 'w')
         file.truncate(0)
-        file.write(json.dumps(db))
+        dump(db, file)
         file.close()        
     return
 
@@ -34,7 +34,7 @@ def init_chat(chatid):
 def save_db():
     file = open('db.json', 'w')
     file.truncate(0)
-    file.write(json.dumps(db))
+    dump(db, file)
     file.close()
     return
 

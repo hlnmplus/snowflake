@@ -12,9 +12,9 @@ logging.basicConfig(level = logging.INFO)
 token = getenv('API-KEY')
 dp = Dispatcher()
 
-from workers import snowflake
+from workers import settings, snowflake, inline
 
-dp.include_routers(snowflake.rt)
+dp.include_routers(settings.rt, snowflake.rt, inline.rt)
 
 bot = Bot(token=token, default=DefaultBotProperties(parse_mode = ParseMode.HTML, link_preview_is_disabled = True))
 
