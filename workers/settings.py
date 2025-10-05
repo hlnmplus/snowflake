@@ -25,6 +25,7 @@ async def start(message: types.Message):
 @rt.message(Command("settings"))
 async def settings(message: types.Message):
     if message.chat.type == 'private':
+        lang = message.from_user.language_code
         await message.reply(locales.string(lang, "settingspm"))
         return
 
