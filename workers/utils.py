@@ -6,6 +6,6 @@ def is_admin(obj):
     else: return False
 
 def bot_is_admin(obj):
-    if (type(obj) == types.chat_member_member.ChatMemberMember) or (types.chat_member_administrator.ChatMemberAdministrator and (obj.can_restrict_members == False or obj.can_delete_messages == False)):
+    if (type(obj) == types.chat_member_member.ChatMemberMember) or (type(obj) == types.chat_member_restricted.ChatMemberRestricted) or (types.chat_member_administrator.ChatMemberAdministrator and (obj.can_restrict_members == False or obj.can_delete_messages == False)):
         return False
     else: return True
