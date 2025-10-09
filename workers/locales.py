@@ -1,4 +1,4 @@
-ghlink = "https://github.com/hlnmplus/snowflake"
+ghlink = "https://github.com/spoutingwhale/snowflake"
 
 en = {
     "hi": "<b>❄️ Hi!</b>\n\nThis bot does only one thing — kicks everybody, who joins your group.",
